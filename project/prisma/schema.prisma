@@ -122,3 +122,11 @@ model Booking {
   startDateUTC DateTime
   cancelCode String
 }
+
+model Tenant {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
