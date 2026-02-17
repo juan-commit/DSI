@@ -10,6 +10,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -50,16 +51,7 @@ model Session {
   privateData        String?
 }
 
-enum ConnectedCalendarStatus {
-  active
-}
 
-enum ConnectedCalendarType {
-  CaldavDigest
-  CaldavBasic
-  GoogleCalendar
-  OutlookCalendar
-}
 
 model ConnectedCalendar {
   id                Int                     @id @default(autoincrement())
@@ -70,8 +62,8 @@ model ConnectedCalendar {
   refreshToken      String?
   owner             User                    @relation(fields: [ownerId], references: [id])
   ownerId           Int
-  status            ConnectedCalendarStatus
-  type              ConnectedCalendarType
+  status            String // ConnectedCalendarStatus
+  type              String // ConnectedCalendarType
   DefaultCalendar   DefaultCalendar[]
   Meeting           Meeting[]
 }
